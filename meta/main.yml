@@ -1,0 +1,11 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: ansibledev
+  author: gustavoav
+  description: Ansible dev environment setup
+  license: MIT
+  min_ansible_version: "2.10"
+  platforms: []
+  galaxy_tags: []
