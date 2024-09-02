@@ -1,2 +1,43 @@
 ---
-# tasks file for ansible-dev
+# - name: Gather the package facts
+#   ansible.builtin.package_facts:
+#     manager: auto
+
+# - name: Tasks if python >= 3.10 is not available
+#   ansible.builtin.debug:
+#     var: ansible_facts.packages
+
+- name: Install dependencies
+  ansible.builtin.apt:
+    name: "{{ ansibledev_apt_dependencies }}"
+    state: present
+    update_cache: true
+  when: ansible_facts.os_family == "Debian"
+  become: true
+
+- name: Enable crb repo
+  community.general.dnf_config_manager:
+    name: crb
+    state: enabled
+  when: ansible_facts.os_family == "RedHat"
+  become: true
+
+- name: Install dependencies
+  ansible.builtin.dnf:
+    name: "{{ ansibledev_dnf_dependencies }}"
+    state: present
+    update_cache: true
+  when: ansible_facts.os_family == "RedHat"
+  become: true
+
+- name: Create venvs dir
+  ansible.builtin.file:
+    path: ~/.virtualenvs
+    mode: "0775"
+    state: directory
+
+- name: Install ansible packages in virtual env
+  ansible.builtin.pip:
+    name: "{{ ansibledev_pip_pkgs }}"
+    state: present
+    virtualenv: ~/.virtualenvs/ansible
