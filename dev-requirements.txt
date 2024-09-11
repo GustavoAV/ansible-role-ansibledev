@@ -1,0 +1,6 @@
+ansible-dev-tools>=24.8.0
+docker>=7.1.0
+# molecule-plugins 23.5.3 has some problems: https://github.com/ansible-community/molecule-plugins/issues/239
+molecule-plugins[docker]==23.5.0
+# requests 2.32.0 has some problems: https://github.com/docker/docker-py/issues/3256
+requests==2.31.0
