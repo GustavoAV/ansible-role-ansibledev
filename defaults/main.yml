@@ -1,11 +1,15 @@
 ---
+ansibledev_min_python: python3.10
+
 ansibledev_apt_dependencies:
   - python3-pip
   - python3-virtualenv
+  - python3-setuptools
 
 ansibledev_dnf_dependencies:
   - python3-pip
   - python3-virtualenv
+  - python3-setuptools
 
 ansibledev_pip_pkgs:
   - ansible-dev-tools

@@ -1,0 +1,17 @@
+---
+- name: Install apt_repository dependencies
+  ansible.builtin.apt:
+    name: dirmngr, gpg-agent
+    state: present
+    update_cache: true
+
+- name: Add deadsnakes ppa
+  ansible.builtin.apt_repository:
+    repo: ppa:deadsnakes/ppa
+    state: present
+
+- name: Install minimum Python for Molecule
+  ansible.builtin.apt:
+    name: "{{ ansibledev_min_python }}, {{ ansibledev_min_python }}-venv"
+    state: present
+    update_cache: true
